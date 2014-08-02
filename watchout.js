@@ -15,9 +15,16 @@ var scoreboard = {
   collisions: 0,
 };
 
-var width = "500";
-var height = "400";
+var width = "800";//"500";
+var height = "550";////"400";
 d3.select('body').append('svg').attr({'width': width, 'height': height});
+
+var randX = function() {
+  return Math.random() * 780 + 10;
+};
+var randY = function() {
+  return Math.random() * 530 + 10;
+}
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
@@ -29,8 +36,8 @@ function getRandomColor() {
 }
 
 var Enemy = function () {
-  this.x = Math.random() * 480 + 10;
-  this.y = Math.random() * 380 + 10;
+  this.x = randX();
+  this.y = randY();
   this.id = "e" + Math.floor(Math.random() * 100 + 1);
 };
 var enemies = [];
@@ -38,12 +45,9 @@ var enemies = [];
 
 var enemyCreator = function(){
   var numEnemies = d3.select('.enemycount')[0][0].value;
-  console.log(numEnemies);
   var enemiesLength = enemies.length;
   if (numEnemies > enemiesLength) {
     for (numEnemies; numEnemies > enemiesLength; numEnemies--) {
-      console.log('numEnemies: ' + numEnemies);
-      console.log('enemies.length: ' + enemies.length);
       enemies.push(new Enemy());
     }
 
@@ -133,8 +137,8 @@ var easyDifficulty = function(){
 
   d3.selectAll('circle').transition().duration(1550).attr({
       'fill': function() {return getRandomColor(); },
-      'cx': function(d){ return d.x = Math.random() * 480 + 10},
-      'cy': function(d){ return d.y = Math.random() * 380 + 10}
+      'cx': function(d){ return d.x = randX();},
+      'cy': function(d){ return d.y = randY();}
   });
 }, 1500);
 };
@@ -144,8 +148,8 @@ var mediumDifficulty = function(){
 
   d3.selectAll('circle').transition().duration(1050).attr({
       'fill': function() {return getRandomColor(); },
-      'cx': function(d){ return d.x = Math.random() * 480 + 10},
-      'cy': function(d){ return d.y = Math.random() * 380 + 10}
+      'cx': function(d){ return d.x = randX();},
+      'cy': function(d){ return d.y = randY();}
   });
 }, 1000);
 };
@@ -155,8 +159,8 @@ var hardDifficulty = function(){
 
   d3.selectAll('circle').transition().duration(650).attr({
       'fill': function() {return getRandomColor(); },
-      'cx': function(d){ return d.x = Math.random() * 480 + 10},
-      'cy': function(d){ return d.y = Math.random() * 380 + 10}
+      'cx': function(d){ return d.x = randX();},
+      'cy': function(d){ return d.y = randY();}
   });
 }, 600);
 };
