@@ -8,6 +8,13 @@
   //set position random
 
   //use css to change the enemy design
+//scoreboard
+var scoreboard = {
+  highscore: 0,
+  currentscore: 0,
+  collisions: 0,
+};
+
 var width = "500";
 var height = "400";
 d3.select('body').append('svg').attr({'width': width, 'height': height});
@@ -26,7 +33,7 @@ var Enemy = function () {
   this.y = Math.random() * 380 + 10;
   this.id = "e" + Math.floor(Math.random() * 100 + 1);
 };
-var numEnemies = 1; //Math.floor(Math.random() * 18) + 7;
+var numEnemies = Math.floor(Math.random() * 18) + 7;
 var enemies = [];
 for (numEnemies; numEnemies > 0; numEnemies--) {
   enemies.push(new Enemy());
@@ -57,7 +64,9 @@ var Player = function(){
       var xTest = (enemyX > (player.x - 8) && enemyX < (player.x + 22));
       var yTest = (enemyY > (player.y - 8) && enemyY <(player.y + 22));
       if (xTest && yTest) {
-        console.log("HIT");
+        scoreboard.currentscore = 0;
+        scoreboard.collisions++;
+        d3.select('.collisions span').text(scoreboard.collisions);
       }
     });
 
@@ -90,6 +99,15 @@ d3.select('svg').append('rect').data(player)
   }).call(dragging); 
 
 setInterval(function(){
+ scoreboard.currentscore++;
+
+ if(scoreboard.currentscore > scoreboard.highscore){
+   scoreboard.highscore = scoreboard.currentscore;
+   d3.select('.high span').text(scoreboard.highscore);
+ }
+ d3.select('.current span').text(scoreboard.currentscore);
+   
+ //scoreboard.highscore;
   playerChar.hit();
 }, 50);
 
