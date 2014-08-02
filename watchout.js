@@ -33,21 +33,34 @@ var Enemy = function () {
   this.y = Math.random() * 380 + 10;
   this.id = "e" + Math.floor(Math.random() * 100 + 1);
 };
-var numEnemies = Math.floor(Math.random() * 18) + 7;
 var enemies = [];
-for (numEnemies; numEnemies > 0; numEnemies--) {
-  enemies.push(new Enemy());
-}
+// random selection var numEnemies = Math.floor(Math.random() * 18) + 7;
 
-d3.select('svg').selectAll('circle')
-  .data(enemies).enter().append('circle')
-  .attr({
-    'fill': 'black',
-    'r': '10',
-    'cx': function(d){return d.x;},
-    'cy': function(d){return d.y;},
-    'id': function(d){return d.id;}
-  });
+var enemyCreator = function(){
+  var numEnemies = d3.select('.enemycount')[0][0].value;
+    
+  if (numEnemies > enemies.length) {
+    for (numEnemies; numEnemies > enemies.length - 1; numEnemies--) {
+    enemies.push(new Enemy());
+    }
+
+    d3.select('svg').selectAll('circle')
+      .data(enemies).enter().append('circle')
+      .attr({
+        'fill': 'black',
+        'r': '10',
+        'cx': function(d){return d.x;},
+        'cy': function(d){return d.y;},
+        'id': function(d){return d.id;}
+      });
+  } else if(numEnemies < enemies.length){
+    for (numEnemies; numEnemies < enemies.length - 1; numEnemies++) {
+      enemies.pop();
+    }
+      d3.select('svg').selectAll('circle')
+      .data(enemies).exit().remove();
+  }
+};
 
 // create player
 
@@ -162,3 +175,4 @@ var changeDifficulty = function(){
 };
 
 changeDifficulty();
+enemyCreator();
