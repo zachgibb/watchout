@@ -110,9 +110,21 @@ setInterval(function(){
  //scoreboard.highscore;
   playerChar.hit();
 }, 50);
+var timer;
 
+var easyDifficulty = function(){
+  timer = setInterval(function(){
 
-setInterval(function(){
+  d3.selectAll('circle').transition().duration(1550).attr({
+      'fill': function() {return getRandomColor(); },
+      'cx': function(d){ return d.x = Math.random() * 480 + 10},
+      'cy': function(d){ return d.y = Math.random() * 380 + 10}
+  });
+}, 1500);
+};
+
+var mediumDifficulty = function(){
+  timer = setInterval(function(){
 
   d3.selectAll('circle').transition().duration(1050).attr({
       'fill': function() {return getRandomColor(); },
@@ -120,3 +132,33 @@ setInterval(function(){
       'cy': function(d){ return d.y = Math.random() * 380 + 10}
   });
 }, 1000);
+};
+
+var hardDifficulty = function(){
+    timer =setInterval(function(){
+
+  d3.selectAll('circle').transition().duration(650).attr({
+      'fill': function() {return getRandomColor(); },
+      'cx': function(d){ return d.x = Math.random() * 480 + 10},
+      'cy': function(d){ return d.y = Math.random() * 380 + 10}
+  });
+}, 600);
+};
+
+var changeDifficulty = function(){
+    var difficulty = d3.select('.difficulty')[0][0].value;
+    if (timer) {
+      clearInterval(timer);
+    }
+     if(difficulty === '1'){
+        easyDifficulty();
+    }
+    if(difficulty === '2'){
+        mediumDifficulty();
+    }
+    if(difficulty === '3'){
+        hardDifficulty();
+    }
+};
+
+changeDifficulty();

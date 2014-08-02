@@ -14,3 +14,7 @@
   display: block;
   margin: 25px auto;
  }
+ .difficulty{
+     position: relative;
+     top: 4px;
+ }
