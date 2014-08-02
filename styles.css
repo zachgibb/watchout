@@ -1,5 +1,16 @@
-/* your beautiful css styling goes here! */
 
-/* Note: an asteroid image is included in this repo. 
-Feel free to use it if you like. */
+ html {
+  height: 10y ;
+ }
 
+ body{
+  background-color: #d3d3d3;
+  height: 100%;
+
+ }
+
+ svg {
+  background-color: white;
+  display: block;
+  margin: 25px auto;
+ }
