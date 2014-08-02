@@ -38,10 +38,13 @@ var enemies = [];
 
 var enemyCreator = function(){
   var numEnemies = d3.select('.enemycount')[0][0].value;
-    
-  if (numEnemies > enemies.length) {
-    for (numEnemies; numEnemies > enemies.length - 1; numEnemies--) {
-    enemies.push(new Enemy());
+  console.log(numEnemies);
+  var enemiesLength = enemies.length;
+  if (numEnemies > enemiesLength) {
+    for (numEnemies; numEnemies > enemiesLength; numEnemies--) {
+      console.log('numEnemies: ' + numEnemies);
+      console.log('enemies.length: ' + enemies.length);
+      enemies.push(new Enemy());
     }
 
     d3.select('svg').selectAll('circle')
@@ -53,8 +56,8 @@ var enemyCreator = function(){
         'cy': function(d){return d.y;},
         'id': function(d){return d.id;}
       });
-  } else if(numEnemies < enemies.length){
-    for (numEnemies; numEnemies < enemies.length - 1; numEnemies++) {
+  } else if(numEnemies < enemiesLength){
+    for (numEnemies; numEnemies < enemiesLength; numEnemies++) {
       enemies.pop();
     }
       d3.select('svg').selectAll('circle')
