@@ -1,13 +1,4 @@
-//plan
-//creatve svg tag
-  //(gameboard)
-  //create cirlce tag
-    //(create enemies)
-  //create path tag
-    //(create player)
-  //set position random
 
-  //use css to change the enemy design
 //scoreboard
 var scoreboard = {
   highscore: 0,
@@ -15,16 +6,19 @@ var scoreboard = {
   collisions: 0,
 };
 
-var width = "800";//"500";
-var height = "550";////"400";
+var width = "800";
+var height = "550";
 d3.select('body').append('svg').attr({'width': width, 'height': height});
+
+
+////////// enemy//////////
 
 var randX = function() {
   return Math.random() * 780 + 10;
 };
 var randY = function() {
   return Math.random() * 530 + 10;
-}
+};
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
@@ -69,7 +63,7 @@ var enemyCreator = function(){
   }
 };
 
-// create player
+//////////// create player////////////
 
 var Player = function(){
   this.x = 250;
@@ -118,6 +112,9 @@ d3.select('svg').append('rect').data(player)
    'fill': 'black'
   }).call(dragging); 
 
+
+///////////// scoring ///////////// 
+
 setInterval(function(){
  scoreboard.currentscore++;
 
@@ -131,6 +128,11 @@ setInterval(function(){
   playerChar.hit();
 }, 50);
 var timer;
+
+
+
+/////////////// Difficulty ////////////////////
+
 
 var easyDifficulty = function(){
   timer = setInterval(function(){
@@ -180,6 +182,9 @@ var changeDifficulty = function(){
         hardDifficulty();
     }
 };
+
+//////////////
+
 
 changeDifficulty();
 enemyCreator();
